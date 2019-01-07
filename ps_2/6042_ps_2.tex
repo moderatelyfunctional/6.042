@@ -111,14 +111,55 @@ x \in \overline{A \cap B}\:\:&\text{IFF}\:\:x \in \overline{A\:\:\text{AND}\:\:B
 \subsection*{Problem 3}
 \par{A \emph{binary word} is a finite sequence of \texttt{0's} and \texttt{1's}. For example, \texttt{(1, 1, 0)} and $(1)$ are words of length three and one, respectively. We usually omit the parentheses and commas in the descriptions of words, so the preceding binary words would just be written as \texttt{110} and \texttt{1}.}
 \par{The basic operation of placing one word immediately after another is called \emph{concatentation}. For example, the concatentation of \texttt{110} and \texttt{1} is \texttt{1101}, and the concatentation of \texttt{110} with itself is \texttt{110110}.}
-
-
-
-
-
-
-
-
+\par{We can extend this basic operation on words to an operation on \emph{sets} of words. To emphasize the distinction between a word and a set of words, from now on, we'll refer to a set of words as a \emph{language}. Now if $R$ and $S$ are languages, then $R \cdot S$ is the language consisting of all the words you can get by concatenating a word from $R$ with a word from $S$. That is}
+\begin{align*}
+R \cdot S ::= \{rs\:\:|\:\:r \in R\:\:\text{AND}\:\:s \in S\}
+\end{align*}
+\par{For example}
+\begin{align*}
+\{0, 00\} \cdot \{00, 000\} = \{000, 0000, 00000\}
+\end{align*}
+\par{Another example is $D \cdot D$, abbreviated as $D^2$, where $D ::= \{1, 0\}$ is just the two binary digits.}
+\begin{align*}
+D^2 &= \{00, 01, 10, 11\}
+\end{align*}
+\par{In other words, $D^2$ is the language consisting of all the length two words. More generally, $D^n$ will be the language of length $n$ words.}
+\par{If $S$ is a language, the language you get by concatenating any number of copies of words in $S$ is called $S^*$-pronounced "S star." (By convention, the empty word $\lambda$ is always included in $S^*$). For example, $\{0,11\}^*$ is the language consisting of all the words you can make by stringing together \texttt{0's} and \texttt{11's}. This language could also be described as consisting of all the words whose blocks of \texttt{1's} are always of even length. Another example is $(D^2)^*$, which consists of all the even length words. Finally, the language $B$ of all binary words is just $D^*$.}
+\par{A language is called \emph{concatenation-definable (c-d)} if it can be constructed by starting with finite languages and then applying the operations of concatenation, union and complement (relative to B) to these languages a finite number of times. Note that the *-operation is \emph{not} allowed. For this reason, the c-d languages are also called the "star-free languages" in the course textbook.}
+\par{Lots of interesting languages turn out to be concatenation-definable, but some very simple languages are not. This problem ends with the conclusion that the language $\{00\}^*$ of even length words whose bits are all \texttt{0's} is not a c-d language.}
+\newline
+\par{a. Show that if $R$ and $S$ are c-d, then so is $R \cap S$.}
+\par{If $R$ and $S$ are c-d, then we can apply c-d operations to them. First taking the complement, we know that $\overline{R}$ and $\overline{S}$ are both c-d. Their union $\overline{R} \cup \overline{S}$ is also c-d.}
+\par{Taking the complement of the union, we have}
+\begin{align*}
+\overline{\overline{R} \cup \overline{S}} &= R \cap S
+\end{align*}
+\par{Therefore, $R \cap S$ is also c-d.}
+\newline
+\par{Now we can show that the set $B$ of all binary words is c-d as follows. Let $u$ and $v$ be any two different binary words. Then $\{u\} \cap \{v\}$ eqauls the empty set. But $\{u\}$ and $\{v\}$ are c-d by definition, so by part a, the empty set is c-d and therefore so is $\overline{0} = B$.}
+\par{Now a more interesting example of a c-d set is the language of all binary words that include three consecutive \texttt{1's}.}
+\begin{align*}
+B\texttt{111}B
+\end{align*}
+\par{Notice that the proper expression here is $B \cdot \{\texttt{111}\} \cdot B$. But it causes no confusion and helps readability to omit the dots in concatenations and the curly braces for sets with one element.}
+\newline
+\par{b. Show that the language consisting of the binary words that start with \texttt{0} and end with \texttt{1} is c-d.}
+\par{The three sets \texttt{0}, \texttt{1} and $B$ are all c-d. Therefore, their concatenation $\texttt{0} \cdot B \cdot \texttt{1}$ is also c-d.} 
+\par{c. Show that $\texttt{0}^*$ is c-d.}
+\begin{align*}
+B \cdot \texttt{1} \cdot B\:\:\text{is}\:\:\text{c-d}.
+\end{align*}
+\par{Let's take the complement which is also c-d.}
+\begin{align*}
+\overline{B \cdot \texttt{1} \cdot B} &= 0^*
+\end{align*}
+\par{d. Show that $\{01\}^*$ is c-d.}
+\par{Our strategy consists of taking the complement of the union of all words that contain invalid two-bit combinations \texttt{00}, \texttt{10}, and \texttt{11} and one-bit combinations \texttt{0} and \texttt{1}.}
+\begin{align*}
+\overline{(B \cdot \texttt{00} \cdot B) \cup (B \cdot \texttt{10} \cdot B) \cup (B \cdot \texttt{11} \cdot B) \cup \texttt{0} \cup \texttt{1}} = \{\texttt{01}\}^*
+\end{align*}
+\par{Let's say a language $S$ is 0-\emph{finite} when it includes only a finite number of words whose bits are all \texttt{0's}, that is when $S \cap 0^*$ is a finite set of words. A language $S$ is 0-\emph{boring}, boring for short, when either $S$ or $\overline{S}$ is 0-finite.}
+\par{e. Explain why $\{00\}^*$ is not boring.}
 
 
 
