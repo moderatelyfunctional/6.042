@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=4cm,
+    bottom=4cm
+]{geometry}
+\usepackage{courier}
+\usepackage{listings}
+\usepackage{tocloft}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+
+\allowdisplaybreaks
+
+\definecolor{pOrange}{RGB}{248,174,33}
+\lstset{
+	basicstyle=\footnotesize\ttfamily,
+	breaklines=true, 
+	numbers=left, 
+	language=Python, 
+	tabsize=2, 
+	moredelim=**[is][\color{green}]{\$}{\$},
+	moredelim=**[is][\color{pOrange}]{!}{!},
+	moredelim=**[is][\color{red}]{~}{~}
+}
+\definecolor{greenJS}{rgb}{0,0.6,0}
+\definecolor{grayJS}{rgb}{0.5,0.5,0.5}
+\definecolor{mauveJS}{rgb}{0.58,0,0.82}
+ 
+%Customize a bit the look
+
+%END of listing package%
+ 
+\definecolor{darkgrayJS}{rgb}{.4,.4,.4}
+\definecolor{purpleJS}{rgb}{0.65, 0.12, 0.82}
+ 
+%define Javascript language
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgrayJS}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purpleJS}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+ 
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Github style syntax highlighting
+\newcommand{\highlight}{\colorbox{gray!10}}
+
+% Does anyone like bullet points?
+\def\labelitemi{--}
+
+\setlength{\headheight}{15.0pt}
+\pagestyle{fancy}
+\lhead{Jing C. Lin}
+\chead{Problem Set 2}
+\rhead{Fall 2015}
+
+\begin{document}
+\setlength{\parindent}{0pt}\par{Collaborators: None. Written Sources: Textbook}
+\subsection*{Problem 1}
+\par{A \emph{formula of set theory} is a predicate formula that only uses the predicate $x \in y$. The domain of discourse is the collection of sets, and $x \in y$ is interpreted to mean the set $x$ is one of the elements in the set $y$.}
+\par{For example, since $x$ and $y$ are the same set iff they have the same members, here's how we can express equality of $x$ and $y$ with a formula of set theory:}
+\begin{align*}
+(x == y) ::= \forall z. (z \in x\:\:\text{IFF}\:\:z \in y)
+\end{align*}
+\par{a. Explain how to write a formula Members($p, a, b$) of set theory that means $p = \{a, b\}$.}
+\begin{align*}
+\forall x.\: x \in p\:\:\text{IFF}\:\:(x = a\:\:\text{OR}\:\:x = b)
+\end{align*}
+\par{A \emph{pair} $(a, b)$ is simply a sequence of length two whose first item is $a$ and whose second is $b$. Sequences are a basic mathematical data type we take for granted, but when we're trying to show how all of mathematics can be reduced to set theory, we need a way to represent the ordered pair $(a, b)$ as a set. One way that will work is to represent $(a, b)$ as}
+\begin{align*}
+\text{pair}(a, b) ::= \{a, \{a, b\}\}
+\end{align*}
+\par{b. Explain how to write a formula Pair$(p, a, b)$ of set theory that means $p = \text{pair}(a, b)$.}
+\begin{align*}
+\text{Pair}(p, a, b) = \text{Members}(p, a, \{a, b\})
+\end{align*}
+\par{c. Explain how to write a formula Second$(p, b)$ of set theory that means $p$ is a pair whose second item is $b$.}
+\begin{align*}
+\text{Second}(p, b) = \forall x, y.\:x \in p\:\:\text{IFF}\:\:(x = y\:\:\text{OR}\:\:x = \{y, b\})
+\end{align*}
+\subsection*{Problem 2}
+\par{Prove De Morgan's Law for set equality}
+\begin{align*}
+\overline{A\cap B} = \overline{A}\cup\overline{B}
+\end{align*}
+\par{by showing with a chain of IFF's that $x \in$ the left hand side IFF $x \in$ the right hand side. You may assume the proportional version of De Morgan's Law:}
+\begin{align*}
+\text{NOT}(P\:\:\text{AND}\:\:Q) = \overline{P}\:\:\text{OR}\:\:\overline{Q}
+\end{align*}
+\begin{align*}
+x \in \overline{A \cap B}\:\:&\text{IFF}\:\:x \in \overline{A\:\:\text{AND}\:\:B} \\
+&\text{IFF}\:\: x \in \text{NOT}(A\:\:\text{AND}\:\:B) \\
+&\text{IFF}\:\: x \in \overline{A}\:\:\text{OR}\:\:x \in \overline{B} \\
+&\text{IFF}\:\: x \in \overline{A} \cup \overline{B}
+\end{align*}
+\subsection*{Problem 3}
+\par{A \emph{binary word} is a finite sequence of \texttt{0's} and \texttt{1's}. For example, \texttt{(1, 1, 0)} and $(1)$ are words of length three and one, respectively. We usually omit the parentheses and commas in the descriptions of words, so the preceding binary words would just be written as \texttt{110} and \texttt{1}.}
+\par{The basic operation of placing one word immediately after another is called \emph{concatentation}. For example, the concatentation of \texttt{110} and \texttt{1} is \texttt{1101}, and the concatentation of \texttt{110} with itself is \texttt{110110}.}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
