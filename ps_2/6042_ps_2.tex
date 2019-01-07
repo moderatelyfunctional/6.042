@@ -145,24 +145,46 @@ B\texttt{111}B
 \newline
 \par{b. Show that the language consisting of the binary words that start with \texttt{0} and end with \texttt{1} is c-d.}
 \par{The three sets \texttt{0}, \texttt{1} and $B$ are all c-d. Therefore, their concatenation $\texttt{0} \cdot B \cdot \texttt{1}$ is also c-d.} 
+\newline
 \par{c. Show that $\texttt{0}^*$ is c-d.}
 \begin{align*}
 B \cdot \texttt{1} \cdot B\:\:\text{is}\:\:\text{c-d}.
 \end{align*}
 \par{Let's take the complement which is also c-d.}
 \begin{align*}
-\overline{B \cdot \texttt{1} \cdot B} &= 0^*
+\overline{B \cdot \texttt{1} \cdot B} &= \texttt{0}^*
 \end{align*}
-\par{d. Show that $\{01\}^*$ is c-d.}
+\par{d. Show that $\{\texttt{01}\}^*$ is c-d.}
 \par{Our strategy consists of taking the complement of the union of all words that contain invalid two-bit combinations \texttt{00}, \texttt{10}, and \texttt{11} and one-bit combinations \texttt{0} and \texttt{1}.}
 \begin{align*}
 \overline{(B \cdot \texttt{00} \cdot B) \cup (B \cdot \texttt{10} \cdot B) \cup (B \cdot \texttt{11} \cdot B) \cup \texttt{0} \cup \texttt{1}} = \{\texttt{01}\}^*
 \end{align*}
-\par{Let's say a language $S$ is 0-\emph{finite} when it includes only a finite number of words whose bits are all \texttt{0's}, that is when $S \cap 0^*$ is a finite set of words. A language $S$ is 0-\emph{boring}, boring for short, when either $S$ or $\overline{S}$ is 0-finite.}
-\par{e. Explain why $\{00\}^*$ is not boring.}
-
-
-
+\par{Let's say a language $S$ is 0-\emph{finite} when it includes only a finite number of words whose bits are all \texttt{0's}, that is when $S \cap 0^*$ is a finite set of words. A language $S$ is 0-\emph{boring}, boring for short, when either $S$ or $\overline{S}$ is \texttt{0}-finite.}
+\newline
+\par{e. Explain why $\{\texttt{00}\}^*$ is not boring.}
+\begin{align*}
+\{\texttt{00}\}^* \cap \texttt{0}^* = \{\texttt{00}\}^*
+\end{align*}
+\par{The set $S$ contains all the even-length \texttt{0's}. The set $\overline{S}$ contains the odd-length \texttt{0's}. Therefore $\overline{S} \cap 0^*$ is not a finite set. Therefore, $\{\texttt{00}\}$ is not boring.}
+\newline
+\par{f. Verify that if $R$ and $S$ are boring, then so is $R \cup S$.}
+\begin{align}
+(R \cup S) \cap \texttt{0}^* &= R \cap \texttt{0}^* \cup S \cap \texttt{0}^* \\
+\overline{(R \cup S)} \cap \texttt{0}^* &= \overline{R} \cap \texttt{0}^* \cap \overline{S} \cap \texttt{0}^*
+\end{align}
+\par{There are four cases. 1) $R$ and $S$ are \texttt{0}-finite 2) $R$ and $\overline{S}$ are \texttt{0}-finite 3) $\overline{R}$ and $S$ are \texttt{0}-infinite and 4) $\overline{R}$ and $\overline{S}$ are \texttt{0}-infinite.}
+\par{In 1), Eqn 1 would be \texttt{0}-finite because it's the union of two \texttt{0}-finite sets. In 2) Eqn 1 would be \texttt{0}-finite because it's the union of $R$, a \texttt{0}-finite set with a non \texttt{0}-finite set. In 3), Eqn 1 would be \texttt{0}-finite because it's the union of a $S$, a \texttt{0}-finite set with a non \texttt{0}-finite set. In 4) Eqn 2 would be \texttt{0}-finite because it's the intersection of two \texttt{0}-finite sets.}
+\newline
+\par{g. Verify that if $R$ and $S$ are boring, then so is $R \cdot S$.}
+\begin{align}
+(R \cdot S) &::= \{rs\:\:|\:\:r \in R\:\:\text{AND}\:\:s \in S\} \\
+(R \cdot S) &\cap \texttt{0}^* \\
+\overline{(R \cdot S)} &\cap \texttt{0}^*
+\end{align}
+\par{Similar to the previous part, Eqn 4 is \texttt{0}-finite for the first three cases and Eqn 5 is \texttt{0}-finite for the last case.}
+\newline
+\par{h. Explain why all c-d languages are boring.}
+\par{c-d languages are constructed from finite languages which are boring by default because their complements are \texttt{0}-infinite sets. The union or concatenation of boring languages is still boring. Taking the complement also ensures that the new language is still boring (since two complements give the original language which was boring). Therefore all c-d languages are boring and the set $(\texttt{00})$ is not a c-d language.}
 
 
 
